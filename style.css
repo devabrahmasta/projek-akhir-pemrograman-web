@@ -1,0 +1,13 @@
+* {
+  font-family: 'Poppins', white, sans-serif;
+  font: white;
+}
+
+.nav-link:hover {
+  color: yellow !important;
+}
+
+.nav-link.active {
+    color: yellow !important;
+}
+
