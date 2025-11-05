@@ -77,6 +77,7 @@
   color: #000;
 }
 
-.gambarHome{
-  
+
+html, body {
+  overflow-x:hidden;
 }
