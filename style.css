@@ -81,3 +81,73 @@
 html, body {
   overflow-x:hidden;
 }
+
+.testimonial-card table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+
+.testimonial-card table.table {
+  
+    margin: 0 !important; 
+   
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.testimonial-card table.table thead tr th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.testimonial-card table.table thead tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.testimonial-card table.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.testimonial-card table.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.d-flex.justify-content-center.vh-100 {
+    align-items: center; 
+    margin-top: -100px; 
+}
+
+.row.h-50 {
+    height: auto !important; 
+    align-items: stretch; 
+}
+
+.col-6.d-flex {
+    padding: 15px; 
+}
+
+.testimonial-card {
+    width: 100%; 
+    min-height: 400px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+}
+
+.testimonial-card .card-body {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    padding: 0; 
+}
+
+
+.col-6:first-child .testimonial-card {
+    padding: 2rem 1.5rem;
+}
+
+
+.col-6:last-child .testimonial-card {
+    padding: 2rem 1.5rem;
+}
