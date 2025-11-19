@@ -1,6 +1,7 @@
 <?php
 // error message
-$error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
+session_start();
+$error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error']) : '';
 ?>
 
 <!DOCTYPE html>
@@ -13,9 +14,13 @@ $error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body class="bg-dark">
+    <?php
+    echo '<script>alert("' . $error_message . '");</script>';
+    ?>
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top mb-5">
         <div class="container-fluid py-3">
             <img style="width: 60px; height: 60px; object-fit: cover;"
@@ -57,13 +62,7 @@ $error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
             <div class="testimonial-card text-center" style="min-height: auto;">
                 <h4 class="text-warning fw-bold mb-4">Login Akun</h4>
 
-                <?php if (!empty($error_message)): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo $error_message; ?>
-                    </div>
-                <?php endif; ?>
-
-                <form action="controllers/login.php" method="post" class="text-start">
+                <form action="../../controllers/auth/login.php" method="post" class="text-start">
                     <div class="mb-3">
                         <label class="form-label text-white" for="username">Username</label>
                         <input class="form-control" name="username" type="text" required>

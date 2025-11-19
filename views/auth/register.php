@@ -63,7 +63,7 @@ $error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
                     </div>
                 <?php endif; ?>
 
-                <form action="controllers/register.php" method="post" class="text-start">
+                <form action="../../controllers/auth/register.php" method="post" class="text-start">
                     <div class="mb-3">
                         <label class="form-label text-white" for="username">Username</label>
                         <input class="form-control" name="username" type="text" required>

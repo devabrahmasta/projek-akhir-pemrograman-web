@@ -57,7 +57,6 @@
     </nav>
 
 
-
     <div class="container-fluid">
         <img id="gambarHome" style="object-fit: cover; "
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/a43502139128971.622a0e70b2b1f.jpg"
