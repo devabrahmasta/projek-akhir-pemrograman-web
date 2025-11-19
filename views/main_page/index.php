@@ -2,7 +2,7 @@
 
 use LDAP\Result;
 
-require_once(__DIR__ . "/../config/connection.php");
+require_once(__DIR__ . "/../../config/connection.php");
 
 $sql = "SELECT * FROM  pelanggan";
 $stmt = $connection->prepare($sql);
@@ -27,7 +27,7 @@ $result = $stmt->get_result();
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/../style.css">
 
 </head>
 
@@ -60,7 +60,7 @@ $result = $stmt->get_result();
                         <a class="nav-link text-white" href="#">Testimoni</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="bmi.php">Cek BMI</a>
+                        <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
                     </li>
                     <li class="nav-item">
                         <a type="button" class="btn btn-warning" href="auth/login.php">Masuk</a>

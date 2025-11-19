@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
                     if (password_verify($password,$row->password)) {
                         $_SESSION['username'] = $username;
-                        header("Location: ../../views/index.php");
+                        header("Location: ../../views/main_page/index.php");
                         exit;
                     } else {
                         $_SESSION['error'] = "Password salah";
