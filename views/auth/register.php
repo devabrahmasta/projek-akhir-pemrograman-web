@@ -16,6 +16,10 @@ $error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 </head>
 
 <body class="bg-dark">
+    <?php
+    echo '<script>alert("' . $error_message . '");</script>';
+    unset($_SESSION['error']);
+    ?>
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top mb-3">
         <div class="container-fluid py-3">
             <img style="width: 60px; height: 60px; object-fit: cover;"

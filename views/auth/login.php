@@ -20,6 +20,7 @@ $error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error']
 <body class="bg-dark">
     <?php
     echo '<script>alert("' . $error_message . '");</script>';
+    unset($_SESSION['error']);
     ?>
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top mb-5">
         <div class="container-fluid py-3">
