@@ -119,7 +119,7 @@ html, body {
     align-items: stretch; 
 }
 
-.col-6.d-flex {
+/* .col-6.d-flex {
     padding: 15px; 
 }
 
@@ -144,4 +144,31 @@ html, body {
 
 .col-6:last-child .testimonial-card {
     padding: 2rem 1.5rem;
+} */
+
+.testimonialContainer {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.testimonial-track {
+    display: inline-flex;
+    animation: scroll 10s linear infinite;
+}
+
+.testimonial-card {
+    width: 280px;   /* ukuran bisa dirubah */
+    padding: 20px;
+    margin-right: 20px; /* jarak antar card */
+    background-color: #1f1f1f;
+    border: 1px solid #ffc10755;
+    border-radius: 20px;
+    color: #fff;
+    position: relative;
+}
+    
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-10%); }
 }

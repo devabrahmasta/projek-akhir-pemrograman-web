@@ -1,3 +1,17 @@
+<?php
+
+use LDAP\Result;
+
+require_once(__DIR__ . "/../config/connection.php");
+
+$sql = "SELECT * FROM  pelanggan";
+$stmt = $connection->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +32,7 @@
 </head>
 
 <body class="bg-dark">
-
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
         <div class="container-fluid py-3">
             <img style="width: 60px; height: 60px; object-fit: cover;"
@@ -58,6 +72,7 @@
 
 
     <div class="container-fluid">
+        <!-- Home -->
         <img id="gambarHome" style="object-fit: cover; "
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/a43502139128971.622a0e70b2b1f.jpg"
             alt="tempat-gym" id="homegym">
@@ -70,81 +85,122 @@
                     Internasional dan Dukungan Dari yang Ahli</p>
             </div>
         </div>
-        <div class="row align-items-center justify-content-between p-5 mx-5 my-5">
+
+        <!-- Fitur -->
+        <div class="row align-items-center justify-content-between px-5 mx-5 my-5">
+            <div class="card border-info mb-3" style="max-width: 22rem;">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h5 class="card-title">Info card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                    <p class="card-text"><a href="">Learn More<ion-icon name="chevron-forward-outline"></ion-icon></a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimoni -->
+        <div class="testimonialContainer mt-5 p-5">
             <div class="col-auto">
                 <h4 class="text-warning">Testimoni</h4>
                 <h2 class="text-white fw-bold">Apa Kata Mereka?</h2>
             </div>
-
-            <div class="col-auto d-flex gap-4 align-items-end">
-                <button id="prevBtn" class="btn btn-outline-warning d-flex align-items-center justify-content-center">
-                    <ion-icon name="chevron-back-outline"></ion-icon>
-                </button>
-                <button id="nextBtn" class="btn btn-outline-warning d-flex align-items-center justify-content-center">
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                </button>
-            </div>
-
-            <div class="row mt-5 justify-content-evenly" id="testimonialContainer">
-                <div class="col-sm-5 mb-5 testimonial">
+            <div class="testimonial-track pt-5">
+                <?php while ($row = $result->fetch_assoc()) { ?>
                     <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto" class="testimonial-photo">
-                        <h5 class="testimonial-name text-center">Andi Pratama</h5>
-                        <p class="testimonial-date text-center">12 Agustus 2024</p>
-                        <p class="testimonial-text text-center">
-                            “Pelayanan cepat dan ramah. Sangat direkomendasikan! Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit. Iste, aperiam. Ullam odio, dolore consequuntur itaque soluta aut dolorum
-                            maiores nobis libero tenetur pariatur quidem sunt incidunt id nostrum ipsam dignissimos.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi a nostrum numquam repellendus?
-                            Dolores eveniet magnam dolore hic, neque ea laborum, consectetur ut atque exercitationem
-                            similique ipsa et mollitia aperiam.”
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-sm-5 mb-5 testimonial">
-                    <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto"
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg"
                             class="testimonial-photo">
-                        <h5 class="testimonial-name text-center">Siti Rahma</h5>
+                        <h5 class="testimonial-name text-center"><?= $row['nama'] ?></h5>
                         <p class="testimonial-date text-center">18 September 2024</p>
-                        <p class="testimonial-text text-center">
-                            “Desain tempatnya bagus banget, bikin nyaman!”
-                        </p>
+                        <p class="testimonial-text text-center"><?= $row['testimoni'] ?></p>
                     </div>
-                </div>
+                <?php } ?>
 
-                <div class="col-sm-5 mb-5 testimonial">
+                <?php mysqli_data_seek($result, 0);
+                while ($row = $result->fetch_assoc()) { ?>
                     <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto" class="testimonial-photo">
-                        <h5 class="testimonial-name text-center">Budi Santoso</h5>
-                        <p class="testimonial-date text-center">1 Oktober 2024</p>
-                        <p class="testimonial-text text-center">
-                            “Harga terjangkau tapi kualitas oke banget!”
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-sm-5 mb-5 testimonial">
-                    <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/women/11.jpg" alt="Foto"
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg"
                             class="testimonial-photo">
-                        <h5 class="testimonial-name text-center">Rina Anggraini</h5>
-                        <p class="testimonial-date text-center">21 Oktober 2024</p>
-                        <p class="testimonial-text text-center">
-                            “Tempatnya bersih, pelayanan cepat. Mantap banget!”
-                        </p>
+                        <h5 class="testimonial-name text-center"><?= $row['nama'] ?></h5>
+                        <p class="testimonial-date text-center">18 September 2024</p>
+                        <p class="testimonial-text text-center"><?= $row['testimoni'] ?></p>
                     </div>
+                <?php } ?>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-fluid px-5" style="background-color: #171717ff;">
+        <footer class="py-5">
+            <div class="row text-white">
+                <div class="col-2 text-white">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-2 text-white">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-2">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-4 offset-1">
+                    <form>
+                        <h5>Subscribe to our newsletter</h5>
+                        <p>Monthly digest of whats new and exciting from us.</p>
+                        <div class="d-flex w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
+            <div class="d-flex justify-content-between py-4 my-4 border-top">
+                <p>© 2021 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#twitter"></use>
+                            </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#instagram"></use>
+                            </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#facebook"></use>
+                            </svg></a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-                crossorigin="anonymous"></script>
 
-
-            <script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
