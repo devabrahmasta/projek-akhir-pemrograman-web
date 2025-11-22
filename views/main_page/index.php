@@ -63,7 +63,7 @@ $result = $stmt->get_result();
                         <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-warning" href="auth/login.php">Masuk</a>
+                        <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
                     </li>
                 </ul>
             </div>
