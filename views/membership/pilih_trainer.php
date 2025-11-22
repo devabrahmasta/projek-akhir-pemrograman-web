@@ -58,7 +58,7 @@ $result = $connection->query($sql);
             <?php 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) { 
-                    // Tentukan gambar avatar berdasarkan gender
+                    // avatar dummy
                     $avatar = ($row['gender'] == 'Perempuan') 
                         ? "https://randomuser.me/api/portraits/women/" . rand(1,90) . ".jpg"
                         : "https://randomuser.me/api/portraits/men/" . rand(1,90) . ".jpg";
