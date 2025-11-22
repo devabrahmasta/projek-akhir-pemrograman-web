@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (password_verify($password,$row->password)) {
                         $_SESSION['username'] = $username;
                         $_SESSION['logged_in'] = true;
-                        header("Location: ../../views/main_page/index.php");
+                        header("Location: ../../views/personal_page/dashboard.php");
                         exit;
                     } else {
                         $_SESSION['error'] = "Password salah";
