@@ -81,7 +81,7 @@ $result = $connection->query($sql);
                             </div>
                         </div>
 
-                        <a href="checkout.php?id_paket=<?php echo $id_paket; ?>&id_trainer=<?php echo $row['id_trainer']; ?>" 
+                        <a href="../../controllers/transaction/transaction.php <?php echo $id_paket; ?>&id_trainer=<?php echo $row['id_trainer']; ?>" 
                            class="btn btn-warning w-100 fw-bold mt-4 text-dark">
                            Pilih <?php echo explode(' ', trim($row['nama']))[0]; ?>
                         </a>
