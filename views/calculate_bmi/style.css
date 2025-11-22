@@ -1,0 +1,224 @@
+
+.bmi-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bmi-modern-card {
+    display: flex;
+    width: 900px;
+    max-width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.bmi-left-panel {
+    width: 55%;
+    padding: 40px;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+    clip-path: polygon(0 0, 92% 0, 100% 100%, 0% 100%);
+}
+
+.bmi-right-panel {
+    width: 55%;
+    margin-left: -10%;
+  
+    background: linear-gradient(rgba(255, 193, 7, 0.95), rgba(255, 160, 0, 0.9)), 
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Gambar Gym */
+    background-size: cover;
+    background-position: center;
+    
+    color: #212529; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 40px 40px 80px;
+    position: relative;
+}
+
+.bmi-title {
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.input-skew-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    transform: skewX(-15deg);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.input-skew-wrapper input {
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    transform: skewX(15deg);
+    outline: none;
+    background: transparent;
+    color: #333;
+    font-weight: 600;
+}
+
+.input-skew-wrapper:focus-within {
+    border-color: #ffc107;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+}
+
+.toggle-container {
+    display: flex;
+    margin-bottom: 25px;
+    transform: skewX(-15deg);
+    border: 2px solid #ffc107; 
+    border-radius: 5px;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.toggle-btn {
+    padding: 5px 20px;
+    cursor: pointer;
+    transform: skewX(15deg);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.toggle-btn.active {
+    background: #ffc107;
+    color: #212529; 
+}
+
+.toggle-btn.inactive {
+    background: #fff;
+    color: #999;
+}
+
+.btn-calculate {
+    width: 100%;
+    
+    background: linear-gradient(90deg, #ffc107, #ffdb4d);
+    color: #212529; 
+    border: none;
+    padding: 12px;
+    font-weight: 900; 
+    text-transform: uppercase;
+    border-radius: 5px;
+    transform: skewX(-15deg);
+    transition: 0.3s;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.btn-calculate span {
+    display: block;
+    transform: skewX(15deg);
+}
+
+.btn-calculate:hover {
+    transform: skewX(-15deg) translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.6);
+}
+
+
+.gender-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-check-input:checked {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+
+.result-big {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    color: #000; 
+}
+
+.result-unit {
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.result-category {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.result-note {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.3); 
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    text-align: left;
+    width: 100%;
+    color: #212529;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.result-note ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-note li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+}
+
+/* HP */
+@media (max-width: 768px) {
+    .bmi-modern-card {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .bmi-left-panel {
+        width: 100%;
+        clip-path: none;
+        padding: 30px;
+    }
+    
+    .bmi-right-panel {
+        width: 100%;
+        margin-left: 0;
+        padding: 40px;
+        clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+    }
+}
