@@ -136,9 +136,9 @@ if (isset($_SESSION['error'])) {
                             <button class="btn btn-warning fw-bold text-dark rounded-3 py-2">
                                 <i class="bi bi-chat-quote me-2"></i> Beri Testimoni
                             </button>
-                            <button class="btn btn-custom-sidebar text-start rounded-3 py-2">
+                            <a href="../../controllers/auth/logout.php" class="btn btn-custom-sidebar text-start rounded-3 py-2">
                                 <i class="bi bi-box-arrow-right me-2"></i> Logout
-                            </button>
+                            </a>
                         </div>
                     </div>
 
