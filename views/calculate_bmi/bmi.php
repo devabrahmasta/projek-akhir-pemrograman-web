@@ -85,7 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a class="nav-link text-white active" href="bmi.php">Cek BMI</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-warning" href="#">Hubungi Kami</a>
+                        <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                            <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
+                        <?php else: ?>
+                            <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>

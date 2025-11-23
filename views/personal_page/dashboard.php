@@ -25,14 +25,50 @@ $result = $stmt->get_result();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-black navbar-dark border-bottom border-secondary sticky-top" style="height: 80px; z-index: 1040; border-color: #1a1a1a !important;">
-        <div class="container-fluid px-4">
-            <a class="navbar-brand fw-bold text-warning" href="../main_page/index.php">
-                <i class="bi bi-lightning-fill"></i> Power GYM
-            </a>
-            <div class="d-flex text-white align-items-center gap-3">
-                <span class="d-none d-md-block">Halo, <strong>Joy Dey</strong></span>
-                <img src="https://via.placeholder.com/40" class="rounded-circle border border-warning">
+    <?php
+
+    // IJIN NAMBAHIN ERROR HANDLING BG
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['error'])) {
+    $message = $_SESSION['error'];
+    echo '<script>alert("' . htmlspecialchars($message) . '");</script>';
+    unset($_SESSION['error']);
+}
+?>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
+        <div class="container-fluid py-3">
+            <a class="navbar-brand text-white fw-bold" href="index.php">Power GYM</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+                <ul class="nav nav-underline ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white active" aria-current="page" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Fasilitas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Membership</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Testimoni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -198,4 +234,4 @@ $result = $stmt->get_result();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 
-</html>
+</html> -->
