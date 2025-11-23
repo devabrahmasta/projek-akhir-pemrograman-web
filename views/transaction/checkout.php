@@ -13,6 +13,9 @@ $nama_trainer = $transaction['nama_trainer'];
 $base_price = $transaction['base_price'];
 $trainer_total = $transaction['trainer_fee']; 
 $total_price = $transaction['total_price'];
+$has_trainer = ($transaction['nama_trainer'] !== "-" && !empty($transaction['nama_trainer']));
+$nama_trainer_display = $has_trainer ? $transaction['nama_trainer'] : "Tanpa Personal Trainer";
+$trainer_class = $has_trainer ? "fw-bold text-white" : "text-muted fst-italic";
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +34,18 @@ $total_price = $transaction['total_price'];
 </head>
 
 <body class="bg-dark">
+    <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
+        <div class="container-fluid py-3">
+            <a class="navbar-brand text-white fw-bold" href="../main_page/index.php">
+                <ion-icon name="arrow-back-outline" style="vertical-align: middle;"></ion-icon> Kembali Ke Beranda
+            </a>
+        </div>
+    </nav>
 
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 20px;">
         
         <div class="col-lg-6 col-md-8 col-sm-10">
-            <div class="testimonial-card p-5" style="width: 100% !important;margin: 0 !important;padding: 2rem;">
+            <div class="testimonial-card p-5 card-full-width" style="width: 100% !important;margin: 0 !important;padding: 2rem;">
                 
                 <h2 class="text-warning fw-bold mb-3 text-center">Konfirmasi Pembelian</h2>
                 <p class="text-white-50 text-center mb-4">Pastikan semua detail di bawah ini sudah benar sebelum melanjutkan ke pembayaran.</p>
@@ -50,9 +60,9 @@ $total_price = $transaction['total_price'];
                             </li>
                             <li class="d-flex justify-content-between mb-2">
                                 <span>Personal Trainer:</span>
-                                <span class="fw-bold"><?php echo htmlspecialchars($nama_trainer); ?></span>
+                                <span class="<?php echo $trainer_class; ?>"><?php echo htmlspecialchars($nama_trainer_display); ?></span>
                             </li>
-                            </ul>
+                        </ul>
                     </div>
                 </div>
 
@@ -64,10 +74,14 @@ $total_price = $transaction['total_price'];
                                 <span>Harga Paket:</span>
                                 <span>Rp <?php echo number_format($base_price, 0, ',', '.'); ?></span>
                             </li>
+                            
                             <li class="d-flex justify-content-between mb-2">
                                 <span>Biaya Trainer Total:</span>
-                                <span>Rp <?php echo number_format($trainer_total, 0, ',', '.'); ?></span>
+                                <span class="<?php echo $trainer_total > 0 ? '' : 'text-muted'; ?>">
+                                    <?php echo ($trainer_total > 0) ? "Rp " . number_format($trainer_total, 0, ',', '.') : "-"; ?>
+                                </span>
                             </li>
+
                             <li class="d-flex justify-content-between pt-3 border-top border-white-50">
                                 <span class="fw-bold fs-5">TOTAL AKHIR:</span>
                                 <span class="fw-bold fs-5 text-warning">Rp <?php echo number_format($total_price, 0, ',', '.'); ?></span>
@@ -84,9 +98,11 @@ $total_price = $transaction['total_price'];
                         <button type="submit" class="btn btn-warning fw-bold py-3 text-dark">
                             Lanjutkan ke Pembayaran <ion-icon name="arrow-forward-circle" style="vertical-align: middle; margin-left: 5px;"></ion-icon>
                         </button>
+                        
                         <a href="../membership/pilih_trainer.php?id_paket=<?php echo $transaction['id_paket']; ?>" 
                            class="btn btn-outline-light text-white">
-                           <ion-icon name="arrow-back-outline" style="vertical-align: middle; margin-right: 5px;"></ion-icon> Ganti Pilihan Trainer
+                           <ion-icon name="people-outline" style="vertical-align: middle; margin-right: 5px;"></ion-icon> 
+                           <?php echo $has_trainer ? "Ganti Personal Trainer" : "Tambah Personal Trainer"; ?>
                         </a>
                     </div>
                 </form>

@@ -6,6 +6,7 @@ session_start();
 
 $sql = "SELECT * FROM paket_member ORDER BY harga ASC";
 $result = $connection->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +109,7 @@ if (isset($_SESSION['error'])) {
                         </ul>
 
                         <div class="d-grid gap-2 mt-3">
-                            <a href="../../views/transaksi/checkout.php?id_paket=<?php echo $row['id_paket']; ?>&trainer=0" 
+                            <a href="../../controllers/transaction/transaction.php?id_paket=<?php echo $row['id_paket']; ?>&trainer=0" 
                                class="btn btn-outline-warning fw-bold">
                                Beli Paket Saja
                             </a>

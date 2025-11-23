@@ -9,7 +9,6 @@ $stmt = $connection->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 
-
 ?>
 
 <!DOCTYPE html>

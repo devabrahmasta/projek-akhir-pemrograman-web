@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../views/auth/login.php");
             exit;
         } else {
-            // PERBAIKAN 1: Ambil id_pelanggan
             $query = "SELECT id_pelanggan, username, password FROM pelanggan WHERE username = ?";
             $statement = $connection->prepare($query);
             $statement->bind_param('s', $username);
@@ -29,8 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
                     if (password_verify($password, $row->password)) {
                         $_SESSION['username'] = $username;
-                        
-                        // PERBAIKAN 2: Simpan id_pelanggan ke session
+        
                         $_SESSION['user_id'] = $row->id_pelanggan;
                         
                         $_SESSION['logged_in'] = true;
