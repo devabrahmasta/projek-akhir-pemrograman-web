@@ -31,7 +31,7 @@ $result = $connection->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="../../views/style.css">
+    <link rel="stylesheet" href="membership.css">
     
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -103,12 +103,16 @@ if (isset($_SESSION['error'])) {
                 } 
             } else {
                 echo "
-                <div class='col-12 text-center'>
-                    <div class='alert alert-warning' role='alert'>
-                        <h4 class='alert-heading'>Mohon Maaf!</h4>
-                        <p>Saat ini seluruh Personal Trainer kami sedang <strong>DISEWA</strong>.</p>
-                        <hr>
-                        <p class='mb-0'>Silakan <a href='../membership/index.php' class='alert-link'>Kembali</a> untuk membeli paket tanpa trainer, atau coba lagi nanti.</p>
+                <div class='col-12 mt-4'>
+                    <div class='alert alert-dark-warning text-center py-5' role='alert'>
+                        <ion-icon name='warning-outline' style='font-size: 4rem;' class='mb-3'></ion-icon>
+                        <h2 class='fw-bold'>Mohon Maaf!</h2>
+                        <p class='fs-5'>Saat ini seluruh Personal Trainer kami sedang <strong>DISEWA</strong>.</p>
+                        <hr class='w-50 mx-auto my-4'>
+                        <p class='mb-0'>
+                            Silakan <a href='../main_page/index.php' class='fw-bold'>KEMBALI</a> 
+                            untuk membeli paket tanpa trainer, atau coba lagi nanti.
+                        </p>
                     </div>
                 </div>";
             }

@@ -123,12 +123,24 @@ body {
 /* Button Sidebar */
 .btn-custom-sidebar {
     background-color: transparent;
-    border: 1px solid #333;
+    border: 1px solid #cb5048;
     color: #aaa;
     transition: 0.3s;
 }
 .btn-custom-sidebar:hover {
-    background-color: #ccff00;
+    background-color: #cb5048;
     color: black;
-    border-color: #ccff00;
+    border-color: #cb5048;
+}
+
+/* Custom Alert Dark Mode */
+.alert-dark-warning {
+    background-color: rgba(255, 193, 7, 0.05) !important; 
+    border: 1px solid #ffc107 !important; 
+    color: #ffc107 !important; 
+    border-radius: 16px; 
+}
+
+.alert-dark-warning ion-icon {
+    color: #ffc107 !important;
 }

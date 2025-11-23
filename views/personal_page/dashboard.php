@@ -20,10 +20,15 @@ $result_user = $stmt_user->get_result();
 $user_data = $result_user->fetch_assoc();
 $stmt_user->close();
 
-$avatar = ($user_data['gender'] == 'Perempuan') ? "https://randomuser.me/api/portraits/women/" . rand(1,90) . ".jpg":"https://randomuser.me/api/portraits/men/" . rand(1,90) . ".jpg";
+$avatar = ($user_data['gender'] == 'Perempuan') ? "https://randomuser.me/api/portraits/women/" . rand(1, 90) . ".jpg" : "https://randomuser.me/api/portraits/men/" . rand(1, 90) . ".jpg";
 
-$sql_membership = "SELECT m.tgl_mulai, p.durasi, p.deskripsi FROM membership m JOIN paket_member p ON m.id_paket = p.id_paket 
-                    WHERE m.id_pelanggan = ? ORDER BY m.id_membership DESC LIMIT 1";
+$sql_membership = "SELECT m.tgl_mulai, m.id_trainer, m.id_paket, p.durasi, p.deskripsi, 
+                          t.nama AS nama_trainer, t.gender AS gender_trainer, t.no_hp AS no_hp_trainer
+                   FROM membership m 
+                   JOIN paket_member p ON m.id_paket = p.id_paket 
+                   LEFT JOIN trainer t ON m.id_trainer = t.id_trainer 
+                   WHERE m.id_pelanggan = ? 
+                   ORDER BY m.id_membership DESC LIMIT 1";
 
 $stmt_member = $connection->prepare($sql_membership);
 $stmt_member->bind_param('i', $user_id);
@@ -40,19 +45,19 @@ $status_badge = "Basic";
 if ($member_data) {
     $tgl_mulai = new DateTime($member_data['tgl_mulai']);
     $tgl_mulai->setTime(0, 0, 0);
-    
+
     $durasi = (int)$member_data['durasi'];
-    
+
     $tgl_akhir = clone $tgl_mulai;
     $tgl_akhir->modify("+$durasi days");
-    
+
     $tgl_sekarang = new DateTime();
     $tgl_sekarang->setTime(0, 0, 0);
 
     if ($tgl_sekarang <= $tgl_akhir) {
         $interval = $tgl_sekarang->diff($tgl_akhir);
         $sisa_hari = $interval->days;
-        
+
         $nama_paket = htmlspecialchars($member_data['deskripsi']);
         $status_member = "Active";
         $status_badge = "Gold";
@@ -62,6 +67,7 @@ if ($member_data) {
         $status_member = "Expired";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +92,7 @@ if ($member_data) {
         unset($_SESSION['error']);
     }
     ?>
-    
+
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
         <div class="container-fluid py-3">
             <a class="navbar-brand text-white fw-bold" href="index.php">Power GYM</a>
@@ -95,13 +101,13 @@ if ($member_data) {
             </button>
             <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
                 <ul class="nav nav-underline ">
-                    <li class="nav-item "><a class="nav-link text-white active" aria-current="page" href="../main_page/index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Fasilitas</a></li>
+                    <li class="nav-item "><a class="nav-link text-white active" aria-current="page" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="../membership/membership_list.php">Membership</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Testimoni</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a></li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
+                        <a href="../../controllers/auth/logout.php" class="btn btn-custom-sidebar text-start rounded-3 py-2">
+                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -175,10 +181,6 @@ if ($member_data) {
                                     <i class="bi bi-chat-quote me-2"></i> Beri Testimoni
                                 </button>
                             <?php endif; ?>
-                            
-                            <a href="../../controllers/auth/logout.php" class="btn btn-custom-sidebar text-start rounded-3 py-2">
-                                <i class="bi bi-box-arrow-right me-2"></i> Logout
-                            </a>
                         </div>
                     </div>
 
@@ -193,7 +195,6 @@ if ($member_data) {
                 </div>
 
                 <div class="row g-3 mb-5">
-                    
                     <div class="col-md-4">
                         <div class="stat-card card-lime">
                             <div class="stat-card-content">
@@ -235,8 +236,83 @@ if ($member_data) {
                             </div>
                         </div>
                     </div>
-
                 </div>
+
+                <?php
+                if ($member_data) {
+                    // 1. KONDISI: Membership Habis
+                    if ($sisa_hari <= 0) {
+                ?>
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <div class="alert alert-dark-warning d-flex align-items-center" role="alert">
+                                    <ion-icon name="alert-circle-outline" class="text-warning me-3 fs-2"></ion-icon>
+                                    <div>
+                                        Masa aktif Membership Anda telah habis!
+                                        <a href="../membership/membership_list.php" class="text-warning fw-bold text-decoration-none ms-2">
+                                            Perpanjang Sekarang <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php
+                        // 2. KONDISI: Member Aktif TAPI Belum Punya Trainer
+                    } elseif ($sisa_hari > 0 && empty($member_data['id_trainer'])) {
+                    ?>
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <div class="bg-card-dark p-4 d-flex align-items-center border border-info" style="border-radius: 12px;">
+                                    <ion-icon name="people-circle-outline" class="text-info me-3 fs-1"></ion-icon>
+                                    <div class="text-white">
+                                        Membership Anda aktif, tapi belum punya Personal Trainer.
+                                        <a href="../membership/pilih_trainer.php?id_paket=<?php echo $member_data['id_paket'] ?? ''; ?>" class="text-info fw-bold text-decoration-none ms-2">
+                                            Cari Trainer Sekarang <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                        // 3. KONDISI: Member Aktif & SUDAH PUNYA Trainer (Tampilkan Profil Trainer)
+                    } else {
+                        // Generate Avatar Trainer Dummy
+                        $avatar_trainer = ($member_data['gender_trainer'] == 'Perempuan')
+                            ? "https://randomuser.me/api/portraits/women/" . rand(1, 99) . ".jpg"
+                            : "https://randomuser.me/api/portraits/men/" . rand(1, 99) . ".jpg";
+                    ?>
+                        <div class="row g-3 mb-4">
+                            <div class="col-12">
+                                <div class="bg-card-dark p-4" style="border-left: 5px solid #28a745;">
+                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+                                        <div class="d-flex align-items-center">
+                                            <img src="<?php echo $avatar_trainer; ?>" alt="Trainer"
+                                                class="rounded-circle border border-2 border-success"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+
+                                            <div class="ms-3">
+                                                <small class="text-success fw-bold text-uppercase ls-1" style="letter-spacing: 1px;">Personal Trainer Anda</small>
+                                                <h4 class="text-white fw-bold mb-0"><?php echo htmlspecialchars($member_data['nama_trainer']); ?></h4>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <a href="https://wa.me/<?php echo $member_data['no_hp_trainer']; ?>" target="_blank" class="btn btn-success fw-bold d-flex align-items-center gap-2">
+                                                <ion-icon name="logo-whatsapp" style="font-size: 1.2rem;"></ion-icon>
+                                                Chat Trainer
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <?php
+                    }
+                }
+                ?>
 
                 <h4 class="text-white fw-bold mb-3">Kelas Minggu Ini</h4>
                 <div class="row g-3 mb-5">
@@ -256,23 +332,13 @@ if ($member_data) {
                     <?php } ?>
                 </div>
 
-                <div class="row g-3">
-                    <div class="col-12">
-                        <div class="bg-card-dark p-4 d-flex align-items-center">
-                            <ion-icon name="information-circle" class="text-warning me-3 fs-2"></ion-icon>
-                            <div class="text-white">
-                                Kamu belum memilih personal trainer. <a href="../membership/pilih_trainer.php?id_paket=1" class="text-warning fw-bold text-decoration-none">Cari Trainer Sekarang <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
     <div class="modal fade" id="modalTestimoni" tabindex="-1" aria-labelledby="modalTestimoniLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content bg-dark border-warning">
-                
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-warning">
+
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title text-white fw-bold" id="modalTestimoniLabel">Bagikan Pengalamanmu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -286,7 +352,7 @@ if ($member_data) {
                             <div class="form-text text-white-50">Minimal 10 karakter</div>
                         </div>
                     </div>
-                    
+
                     <div class="modal-footer border-secondary">
                         <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-warning fw-bold">Kirim Testimoni</button>
