@@ -25,7 +25,17 @@ $result = $connection->query($sql);
 </head>
 
 <body class="bg-dark">
+    <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+if (isset($_SESSION['error'])) {
+    $message = $_SESSION['error'];
+    echo '<script>alert("' . htmlspecialchars($message) . '");</script>';
+    unset($_SESSION['error']);
+}
+?>
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top mb-5">
         <div class="container-fluid py-3">
             <img style="width: 60px; height: 60px; object-fit: cover;"

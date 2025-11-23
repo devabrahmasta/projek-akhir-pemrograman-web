@@ -38,6 +38,17 @@ $result = $connection->query($sql);
 </head>
 
 <body class="bg-dark">
+    <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['error'])) {
+    $message = $_SESSION['error'];
+    echo '<script>alert("' . htmlspecialchars($message) . '");</script>';
+    unset($_SESSION['error']);
+}
+?>
 
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
         <div class="container-fluid py-3">
@@ -81,7 +92,7 @@ $result = $connection->query($sql);
                             </div>
                         </div>
 
-                        <a href="../../controllers/transaction/transaction.php <?php echo $id_paket; ?>&id_trainer=<?php echo $row['id_trainer']; ?>" 
+                        <a href="../../controllers/transaction/transaction.php?id_paket=<?php echo $id_paket; ?>&id_trainer=<?php echo $row['id_trainer']; ?>" 
                            class="btn btn-warning w-100 fw-bold mt-4 text-dark">
                            Pilih <?php echo explode(' ', trim($row['nama']))[0]; ?>
                         </a>

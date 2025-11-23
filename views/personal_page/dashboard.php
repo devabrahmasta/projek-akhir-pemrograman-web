@@ -31,6 +31,19 @@ $result = $stmt->get_result();
 </head>
 
 <body>
+    <?php
+
+    // IJIN NAMBAHIN ERROR HANDLING BG
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['error'])) {
+    $message = $_SESSION['error'];
+    echo '<script>alert("' . htmlspecialchars($message) . '");</script>';
+    unset($_SESSION['error']);
+}
+?>
     <!-- Navbar -->
     <!-- <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top">
         <div class="container-fluid py-3">

@@ -1,8 +1,4 @@
-<?php
-// error message
-session_start();
-$error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error']) : '';
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +15,16 @@ $error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error']
 
 <body class="bg-dark">
     <?php
-    if ($error_message!=null) {
-        echo '<script>alert("' . $error_message . '");</script>';
-        unset($_SESSION['error']);
-    }
-    ?>
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['error'])) {
+    $message = $_SESSION['error'];
+    echo '<script>alert("' . htmlspecialchars($message) . '");</script>';
+    unset($_SESSION['error']);
+}
+?>
     <nav class="navbar navbar-expand-lg bg-transparent mx-5 px-5 sticky-top mb-5">
         <div class="container-fluid py-3">
             <img style="width: 60px; height: 60px; object-fit: cover;"
@@ -54,7 +55,11 @@ $error_message = isset($_SESSION['error']) ? htmlspecialchars($_SESSION['error']
                         <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-warning" href="#">Hubungi Kami</a>
+                        <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                            <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
+                        <?php else: ?>
+                            <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>
