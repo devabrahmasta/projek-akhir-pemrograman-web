@@ -1,3 +1,134 @@
 body {
-    background-color: #150c0c;
+    background-color: #000000 !important;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Container Dashboard */
+.dashboard-container {
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+
+/* --- SIDEBAR (KIRI) --- */
+.sidebar-area {
+    background-color: #000000;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid #1a1a1a;
+    padding-right: 10px;
+}
+
+/* --- CONTENT (KANAN) --- */
+.content-area {
+    background-color: #000000;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 100px;
+}
+
+/* --- STYLE DASAR CARD (TANPA OUTLINE) --- */
+.stat-card, 
+.bg-card-dark {
+    background-color: #2d2929 !important; 
+    border: none !important; 
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/*  Profile */
+.card-outline {
+    border: 1px solid #747474 !important; 
+}
+
+/* Efek Hover */
+.stat-card:hover,
+.bg-card-dark:hover {
+    background-color: #252525 !important;
+    transform: translateY(-3px);
+    /* border: 1px solid #ccff00 !important; */ 
+    transition: all 0.3s ease;
+}
+
+.stat-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Icon Bulat di Kanan */
+.stat-icon-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Tema Warna Icon */
+.icon-theme-green { background: rgba(25, 135, 84, 0.2); color: #198754; }
+.icon-theme-blue { background: rgba(13, 110, 253, 0.2); color: #0d6efd; }
+.icon-theme-yellow { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+
+.stat-card.card-lime {
+    background-color: #ccff00 !important;
+    border: none;
+    color: black !important;
+}
+
+.stat-card.card-lime .stat-number,
+.stat-card.card-lime h3 {
+    color: #000000 !important;
+}
+
+.stat-card.card-lime .stat-label,
+.stat-card.card-lime small {
+    color: #333333 !important;
+}
+
+.stat-card.card-lime .stat-icon-circle {
+    background-color: rgba(0,0,0, 0.1);
+    color: #000000;
+}
+
+.sidebar-divider {
+    border-top: 1px solid #222;
+    margin: 1.5rem 0;
+}
+
+/* Button Sidebar */
+.btn-custom-sidebar {
+    background-color: transparent;
+    border: 1px solid #333;
+    color: #aaa;
+    transition: 0.3s;
+}
+.btn-custom-sidebar:hover {
+    background-color: #ccff00;
+    color: black;
+    border-color: #ccff00;
 }
