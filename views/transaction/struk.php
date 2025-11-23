@@ -42,7 +42,7 @@ if (!$data) {
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 20px;">
         <div class="col-lg-5 col-md-7 col-sm-10">
             
-            <div class="testimonial-card card-full-width p-0 overflow-hidden" style="background-color: #fff; color: #333;">
+            <div class="testimonial-card card-full-width p-0 overflow-hidden" style="background-color: #fff; color: #333;width: 100% !important;margin: 0 !important;padding: 2rem;">
                 
                 <div class="bg-warning p-4 text-center">
                     <div class="rounded-circle bg-white d-inline-flex p-3 mb-3 shadow-sm">

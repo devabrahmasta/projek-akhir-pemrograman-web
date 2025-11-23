@@ -51,13 +51,13 @@ if (isset($_SESSION['error'])) {
             <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
                 <ul class="nav nav-underline ">
                     <li class="nav-item ">
-                        <a class="nav-link text-white active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link text-white active" aria-current="page" href="../main_page/index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Fasilitas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Membership</a>
+                        <a class="nav-link text-white" href="../membership/membership_list.php">Membership</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Testimoni</a>
@@ -66,7 +66,11 @@ if (isset($_SESSION['error'])) {
                         <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
+                        <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                            <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
+                        <?php else: ?>
+                            <a type="button" class="btn btn-warning" href="../auth/login.php">Masuk</a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>
