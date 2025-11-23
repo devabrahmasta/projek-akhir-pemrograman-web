@@ -1,0 +1,103 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Gambar */
+.bg-image-side {
+    background: url('https://i.pinimg.com/1200x/32/99/8d/32998d4e0427c1fa9d0f51e5b09ba781.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Overlay */
+.bg-image-side::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); 
+}
+
+/* Form */
+.form-area {
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 450px; 
+    color: white;
+}
+
+/* back */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    color: #ffc107;
+}
+
+/* Teks input putih, background gelap */
+.form-control, 
+.form-select {
+    background-color: #212529 !important;
+    color: #ffffff !important; 
+    border: 1px solid #495057;
+}
+
+/* Focus */
+.form-control:focus, 
+.form-select:focus {
+    background-color: #212529 !important;
+    color: #ffffff !important;
+    border-color: #ffc107; /* Outline Kuning */
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+/* Placeholder input warna abu */
+.form-control::placeholder {
+    color: #adb5bd !important;
+    opacity: 1;
+}
+
+/* Icon mata */
+input[type="password"]::-webkit-password-reveal-button {
+    filter: invert(1) brightness(100%);
+    cursor: pointer;
+}
+
+input[type="password"]::-ms-reveal {
+    filter: invert(1) brightness(100%);
+    cursor: pointer;
+}
+
+/* invalid opsi */
+select.form-select:invalid {
+    color: #6c757d !important; 
+}
+
+/* waktu diselect */
+select.form-select option {
+    color: white;
+    background-color: #212529;
+}
+
+/* Placeholder  */
+select.form-select option[value=""][disabled] {
+    color: #6c757d;
+}
