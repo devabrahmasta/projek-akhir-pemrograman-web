@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 $hasil = null;
 $bmi_category = "Belum Dihitung";
 $bmi_number = "00.00";
