@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=BebasNeue:wght@400;600;700&display=swap');
+
+.title {
+  font-family: 'Bebas Neue', white, sans-serif;
+  font-size: 4rem !important;
+}
+
+.navbar{
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.0));
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    position: relative;
+    /* background: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/a43502139128971.622a0e70b2b1f.jpg') no-repeat center center; */
+    background: url('https://i.pinimg.com/1200x/20/5e/93/205e93101655fdcd4419f1bf13ab709c.jpg') no-repeat center center;
+    background-size: cover; 
+    height: 100vh; 
+    display: flex;
+    align-items: center; 
+    color: white;
+    padding-top: 100px; 
+}
+
+/* Overlay */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0, 0, 0, 0.5)); /* Gradasi hitam */
+    z-index: 1;
+}
+
+/* Konten di atas overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: 'Bebas Neue', white, sans-serif;
+    font-size: 6rem; 
+    font-weight: 900; 
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.hero-btn {
+    padding: 12px 30px;
+    border-radius: 50px; 
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- FASILITAS SECTION --- */
+
+/* Style Card */
+.feature-card {
+    background-color: #1a1a1a; 
+    border: 1px solid #333; 
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    cursor: default;
+}
+
+/* Style Kotak Ikon */
+.feature-card .icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: rgba(255, 193, 7, 0.1); 
+    color: #ffc107; 
+    font-size: 1.8rem;
+    transition: 0.3s ease;
+}
+
+/* --- EFEK HOVER (Saat mouse masuk) --- */
+.feature-card:hover {
+    transform: translateY(-10px); 
+    border-color: #ffc107; 
+    background-color: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.15); 
+}
+
+/* Ikon berubah warna saat hover */
+.feature-card:hover .icon-box {
+    background-color: #ffc107;
+    color: #000; 
+}
+
+/* Teks judul berubah dikit saat hover */
+.feature-card:hover h4 {
+    color: #ffc107 !important;
+}
+
+/* --- KELAS SECTION --- */
+
+/* Scroll Horizontal */
+.class-menu-wrapper {
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+}
+
+/* scrollbar */
+.class-menu-wrapper::-webkit-scrollbar {
+    display: none; 
+}
+
+.class-nav {
+    min-width: max-content; 
+    gap: 10px;
+}
+
+/* Style Tombol Menu */
+.class-nav .nav-link {
+    color: #888; 
+    background-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.class-nav .nav-link:hover {
+    color: white !important;
+}
+
+/* Style Tombol */
+.class-nav .nav-link.active {
+    background-color: #555; 
+    color: white !important;
+}
+
+/* Card Gambar */
+.class-card {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    border-radius: 20px; 
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.class-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Overlay Teks */
+.class-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.581), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    z-index: 2;
+}
+
+/* Responsive untuk HP */
+@media (max-width: 768px) {
+    .class-card {
+        height: 400px;
+    }
+    .class-overlay h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- PERSONAL TRAINER SECTION --- */
+
+.trainer-card {
+    background-color: #0f0f0f; /* Hitam pekat */
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #333;
+}
+
+/* Efek Hover pada Kartu */
+.trainer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2); /* Glow kuning halus */
+    border-color: #ffc107;
+}
+
+/* Bagian Gambar */
+.trainer-img-box {
+    position: relative;
+    height: 300px; /* Tinggi gambar seragam */
+    overflow: hidden;
+}
+
+.trainer-img {
+    width: 100%;
+    height: 100%;
+    scroll-padding-top: 100px; 
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: grayscale(20%); 
+}
+
+.trainer-card:hover .trainer-img {
+    transform: scale(1.1); /* Zoom saat hover */
+    filter: grayscale(0%); /* Jadi berwarna penuh */
+}
+
+/* Overlay Nama di atas gambar */
+.trainer-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, #0f0f0f 10%, transparent);
+    padding: 20px;
+    z-index: 2;
+}
+
+/* Highlight khusus untuk Master Coach (Opsional) */
+.master-card {
+    border: 1px solid #ffc107; /* Border emas */
+}
+
+.master-card .trainer-info {
+    background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
+}
+/* --- TESTIMONI SECTION --- */
+
+/* Container Pembungkus (Menyembunyikan scrollbar) */
+/* Di HTML kamu, ini adalah div pembungkus track */
+.testimonial-wrapper { 
+    width: 100%;
+    overflow: hidden; /* Wajib hidden biar ga ada scrollbar bawah */
+    position: relative;
+}
+
+/* Track Slider */
+.testimonial-track {
+    display: flex;
+    gap: 30px;
+    padding: 40px 10px;
+    width: max-content; /* PENTING: Agar lebar mengikuti jumlah kartu + duplikat */
+    
+    /* Animasi Jalan */
+    animation: scroll 30s linear infinite; 
+}
+
+/* KUNCI: Berhenti saat Hover */
+.testimonial-track:hover {
+    animation-play-state: paused; /* Ini otomatis didukung browser modern */
+}
+
+/* Animasi Infinite */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Kita geser -50% karena total lebar sekarang adalah 200% (asli + duplikat) */
+        /* Saat mencapai -50%, dia akan 'teleport' balik ke 0 secara instan tanpa terlihat mata */
+        transform: translateX(-50%);
+    }
+}
+
+/* Style Kartu (Sesuai request sebelumnya) */
+.testimonial-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 3rem 2rem 2rem 2rem;
+    min-width: 350px; /* Lebar harus fix biar animasi lancar */
+    position: relative;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    overflow: visible !important;
+}
+
+/* Efek Hover Kartu */
+.testimonial-card:hover {
+    border-color: #ffc107;
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+    transform: translateY(-5px);
+    background-color: #222;
+}
+
+/* Foto Profil */
+.testimonial-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid #1a1a1a;
+    outline: 2px solid #ffc107;
+    background-color: #333;
+    z-index: 10;
+}
+
+/* Typography */
+.testimonial-name {
+    color: #fff ;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.testimonial-date {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-text {
+    color: #ccc;
+    font-style: italic;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}

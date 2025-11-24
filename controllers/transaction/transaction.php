@@ -9,7 +9,7 @@ function redirect($path, $errorMessage = null) {
     exit;
 }
 
-require_once(__DIR__ . "../../config/connection.php"); 
+require_once(__DIR__ . "/../../config/connection.php"); 
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     redirect("../../views/auth/login.php", "Anda harus login untuk melanjutkan pembelian.");

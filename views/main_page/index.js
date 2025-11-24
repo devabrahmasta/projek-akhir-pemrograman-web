@@ -42,18 +42,48 @@
 // });
 
 // scroll infinite
-const container = document.querySelector('.testimonial');
+// const container = document.querySelector('.testimonial');
 
-let scrollSpeed = 1; // bisa kamu atur
+// let scrollSpeed = 1; // bisa kamu atur
 
-function autoScroll() {
-  container.scrollLeft += scrollSpeed;
+// function autoScroll() {
+//   container.scrollLeft += scrollSpeed;
 
-  if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
-    container.scrollLeft = 0; // balik ke awal
-  }
+//   if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+//     container.scrollLeft = 0; // balik ke awal
+//   }
 
-  requestAnimationFrame(autoScroll);
-}
+//   requestAnimationFrame(autoScroll);
+// }
 
-autoScroll();
+// document.addEventListener("DOMContentLoaded", () => {
+//     const track = document.querySelector(".testimonial-track");
+    
+//     // Ambil semua kartu yang ada sekarang
+//     const cards = Array.from(track.children);
+    
+//     // Duplikat setiap kartu dan masukkan ke track (supaya loop-nya mulus)
+//     cards.forEach((card) => {
+//         const clone = card.cloneNode(true);
+//         track.appendChild(clone);
+//     });
+// });
+
+// autoScroll();
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const track = document.querySelector(".testimonial-track");
+    
+//     if (track) {
+//         // Ambil semua kartu asli
+//         const cards = Array.from(track.children);
+        
+//         // Duplikat kartu dan masukkan ke track
+//         // Ini penting agar animasi CSS translateX(-50%) berjalan mulus tanpa putus
+//         cards.forEach((card) => {
+//             const clone = card.cloneNode(true);
+//             clone.setAttribute('aria-hidden', true); // Good practice untuk aksesibilitas
+//             track.appendChild(clone);
+//         });
+//     }
+// });

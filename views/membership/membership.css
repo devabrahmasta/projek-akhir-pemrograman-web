@@ -1,0 +1,17 @@
+.alert-dark-warning {
+    background-color: rgba(255, 193, 7, 0.05) !important; 
+    border: 1px solid #ffc107 !important; 
+    color: #ffc107 !important; 
+    border-radius: 16px;
+}
+
+/* Warna link di dalam alert */
+.alert-dark-warning a {
+    color: #ffc107 !important;
+    text-decoration: underline;
+}
+
+.alert-dark-warning hr {
+    border-color: #ffc107 !important;
+    opacity: 0.3;
+}
