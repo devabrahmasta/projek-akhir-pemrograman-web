@@ -22,7 +22,6 @@ $stmt_user->close();
 
 $avatar = ($user_data['gender'] == 'Perempuan') ? "https://randomuser.me/api/portraits/women/" . rand(1, 90) . ".jpg" : "https://randomuser.me/api/portraits/men/" . rand(1, 90) . ".jpg";
 
-// Tambahkan t.image dan t.spesialisasi di SELECT
 $sql_membership = "SELECT m.tgl_mulai, m.id_trainer, m.id_paket, p.durasi, p.deskripsi, 
                           t.nama AS nama_trainer, 
                           t.gender AS gender_trainer, 
@@ -114,7 +113,7 @@ $result_kelas = $connection->query($sql_kelas);
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-5 py-3">
         <div class="container-fluid">
-            <img style="max-height: 120px; object-fit: cover;"
+            <img style="max-height: 100px; object-fit: cover;"
                 src="../../images/logo.png" alt="Logo">
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -155,7 +154,7 @@ $result_kelas = $connection->query($sql_kelas);
                         <h4 class="fw-bold text-white mb-1"><?= htmlspecialchars($user_data['nama']); ?></h4>
                         <span class="badge bg-warning text-dark mb-4">Member <?= ($status_member == 'Active') ? 'Gold' : 'Basic'; ?></span>
 
-                        <div class="d-flex justify-content-between text-center bg-black rounded-4 p-3 bg-opacity-   25">
+                        <div class="d-flex justify-content-between text-center bg-black rounded-4 p-3 bg-opacity-25">
                             <div>
                                 <small class="text-secondary d-block mb-1" style="font-size: 0.7rem;">UMUR</small>
                                 <span class="fw-bold text-white">-</span>
@@ -174,7 +173,7 @@ $result_kelas = $connection->query($sql_kelas);
                     </div>
 
                     <div class="bg-card-dark p-4 mb-3">
-                        <h6 class="text-secondary text-uppercase fw-bold mb-4" style="font-size: 0.75rem; letter-spacing: 1px;">Aktivitas Hari Ini</h6>
+                        <h6 class="text-white- text-uppercase fw-bold mb-4" style="font-size: 0.75rem; letter-spacing: 1px;">Aktivitas Hari Ini</h6>
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div class="d-flex align-items-center gap-3">
                                 <div class="text-success"><ion-icon name="log-in-outline" size="large"></ion-icon></div>
@@ -193,6 +192,14 @@ $result_kelas = $connection->query($sql_kelas);
                                     <span class="fw-bold text-white">-</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-card-dark p-3">
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn fw-bold text-white rounded-3 py-2" >
+                                <i class="bi bi-pencil-square me-1"></i> Edit Profile
+                            </button>
                         </div>
                     </div>
 
@@ -338,18 +345,19 @@ $result_kelas = $connection->query($sql_kelas);
                 } else {
                     // USER BARU (Belum Membership)
                     ?>
-                    <div class="row g-3 mb-4">
+                    <div class="row g-3 mb-4 d-flex">
                         <div class="col-12">
-                            <div class="alert alert-dark-primary d-flex align-items-center shadow" role="alert">
+                            <div class="alert alert-dark-warning d-flex align-items-center shadow" role="alert">
                                 <div class="me-3 fs-1">
                                     <ion-icon name="card-outline"></ion-icon>
                                 </div>
-                                <div>
-                                    <h5 class="alert-heading fw-bold mb-1">Selamat Datang, <?= htmlspecialchars($user_data['nama']); ?>! 👋</h5>
+                                <div class="me-5">
+                                    <h5 class="alert-heading fw-bold mb-1">Selamat Datang, <?= htmlspecialchars($user_data['nama']); ?>!</h5>
                                     <p class="mb-0">Kamu belum punya membership aktif. Yuk mulai transformasi tubuhmu sekarang!</p>
-                                    <hr>
-                                    <a href="../membership/membership_list.php" class="btn btn-primary fw-bold text-white">
-                                        Pilih Paket Membership <ion-icon name="arrow-forward-outline" style="vertical-align: middle; margin-left:5px;"></ion-icon>
+                                </div>
+                                <div>
+                                    <a href="../membership/membership_list.php" class="btn btn-warning fw-bold">
+                                        Pilih Paket Membership
                                     </a>
                                 </div>
                             </div>
@@ -358,13 +366,31 @@ $result_kelas = $connection->query($sql_kelas);
                 <?php
                 }
                 ?>
+
+                <!-- TESTIMONI -->
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h4 class="text-white fw-bold mb-1">Bagaimana pengalaman latihanmu?</h4>
+                        <p class="text-secondary small mb-0">Yuk, ulas fasilitas kami agar menjadi lebih baik!</p>
+                    </div>
+                </div>
+
                 <div class="bg-card-dark p-3">
                     <div class="d-grid gap-2">
                         <?php if (!empty($user_data['testimoni'])): ?>
                             <div class="text-white text-center p-2">
-                                <small class="text-warning d-block mb-1"><i class="bi bi-quote"></i> Kata Anda:</small>
-                                <p class="fst-italic mb-0">"<?= htmlspecialchars($user_data['testimoni']); ?>"</p>
+                                <small class="text-warning d-block mb-2"><i class="bi bi-quote"></i> Kata Anda:</small>
+
+                                <p class="fst-italic mb-3">"<?= htmlspecialchars($user_data['testimoni']); ?>"</p>
+
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-light rounded-pill px-3 opacity-75"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalTestimoni">
+                                    <i class="bi bi-pencil-square me-1"></i> Edit Ulasan
+                                </button>
                             </div>
+
                         <?php else: ?>
                             <button type="button" class="btn btn-warning fw-bold text-dark rounded-3 py-2" data-bs-toggle="modal" data-bs-target="#modalTestimoni">
                                 <i class="bi bi-chat-quote me-2"></i> Beri Testimoni

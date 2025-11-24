@@ -367,7 +367,7 @@ $result = $stmt->get_result();
                         <div class="testimonial-card" style="max-width: 300px;">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testimonial-photo">
                             <h5 class="testimonial-name text-center"><?= $row['nama'] ?></h5>
-                            <p class="testimonial-date text-center">18 September 2024</p>
+                            <p class="testimonial-date text-center"><?= $row['tanggal_testimoni'] ?></p>
                             <p class="testimonial-text text-center">"<?= $row['testimoni'] ?>"</p>
                         </div>
                     <?php } ?>

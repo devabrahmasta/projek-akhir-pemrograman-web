@@ -75,7 +75,7 @@ $result = $connection->query($sql);
         <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-5 py-3">
         <div class="container-fluid">
-            <img style="max-height: 120px; object-fit: cover;"
+            <img style="max-height: 100px; object-fit: cover;"
                 src="../../images/logo.png" alt="Logo">
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
