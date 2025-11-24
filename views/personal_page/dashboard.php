@@ -356,7 +356,7 @@ if ($member_data) {
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="../../controllers/personal/submit_testimoni.php" method="POST">
+                <form action="../../controllers/personal/kirim_testimoni.php" method="POST">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="testimoniText" class="form-label text-white-50">Apa pendapatmu tentang Power GYM?</label>
