@@ -26,6 +26,7 @@ $result = $stmt->get_result();
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="index.css">
 
@@ -40,31 +41,19 @@ $result = $stmt->get_result();
                 alt="Logo">
             <a class="navbar-brand text-warning fw-bold ms-2" href="index.php">Power GYM</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <!-- aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="nav nav-underline">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#fasilitas">Fasilitas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#kelas">Kelas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#trainer">Personal Trainer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#testimonial">Testimoni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#contact">Hubungi Kami</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a>
-                    </li>
+                <ul class="nav nav-underline ">
+                    <li class="nav-item"><a class="nav-link text-white" href="#fasilitas">Fasilitas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#kelas">Kelas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#trainer">Personal Trainer</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#testimonial">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#contact">Hubungi Kami</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a></li>
                     <li class="nav-item">
                         <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                             <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
@@ -82,7 +71,7 @@ $result = $stmt->get_result();
         <div class="container hero-content">
             <div class="row">
                 <div class="col-lg-8 px-3">
-                    <h6 class="text-warning fw-bold mb-3 ls-2">FITNESS PLUS UBUD</h6>
+                    <h6 class="text-warning fw-bold mb-3 ls-2">POWER GYM</h6>
 
                     <h1 class="hero-title mb-4 fw-bold">
                         Latihan Eksklusif,<br>
@@ -90,7 +79,7 @@ $result = $stmt->get_result();
                     </h1>
 
                     <p class="lead text-white-50 mb-5" style="max-width: 600px;">
-                        Temukan ketenangan dan energi baru di Mega Gym 24 jam pertama di Ubud dengan fasilitas standar internasional.
+                        Temukan ketenangan dan energi baru di Mega Gym 24 jam pertama di Jogja dengan fasilitas standar internasional.
                     </p>
 
                     <a href="../auth/login.php" class="btn btn-warning hero-btn text-dark">
@@ -204,7 +193,7 @@ $result = $stmt->get_result();
     </section>
 
     <!-- KELAS -->
-    <section class="py-5" style="background-color: #1a1a1a;" id="kelas" >
+    <section class="py-5" style="background-color: #1a1a1a;" id="kelas">
         <div class="container py-5">
 
             <div class="text-center mb-5">
@@ -304,39 +293,32 @@ $result = $stmt->get_result();
 
                 // Data Dummy 
                 $specialties = [
-                    ['title' => 'Body Building', 'skills' => ['Muscle Hypertrophy', 'Strength Training', 'Diet Plan']],
-                    ['title' => 'Fat Loss Expert', 'skills' => ['HIIT Cardio', 'Calorie Deficit', 'Endurance']],
-                    ['title' => 'Yoga Specialist', 'skills' => ['Flexibility', 'Mindfulness', 'Pilates']],
-                    ['title' => 'Functional Coach', 'skills' => ['Crossfit', 'Agility', 'Injury Rehab']]
+                    ['skills' => ['Muscle Hypertrophy', 'Strength Training', 'Diet Plan']],
+                    ['skills' => ['HIIT Cardio', 'Calorie Deficit', 'Endurance']],
+                    ['skills' => ['Flexibility', 'Mindfulness', 'Pilates']],
+                    ['skills' => ['Crossfit', 'Agility', 'Injury Rehab']]
                 ];
 
                 $counter = 0;
 
                 if ($result_trainer->num_rows > 0) {
                     while ($pt = $result_trainer->fetch_assoc()) {
-                        // Ambil keahlian secara berurutan dari array dummy
                         $spec = $specialties[$counter % count($specialties)];
-
-                        // Bikin kartu ke-3 jadi "Master Coach" biar variatif
-                        $is_master = ($counter == 2) ? true : false;
-                        $card_class = $is_master ? "trainer-card master-card" : "trainer-card";
-                        $badge_class = $is_master ? "badge bg-danger text-white mb-2" : "badge bg-warning text-dark mb-2";
-                        $badge_text = $is_master ? "MASTER COACH" : $spec['title'];
                 ?>
                         <div class="col-md-6 col-lg-3">
-                            <div class="<?php echo $card_class; ?>">
+                            <div class="trainer-card">
                                 <div class="trainer-img-box">
-                                    <img src="<?php echo $pt['image']; ?>" alt="<?php echo $pt['nama']; ?>" class="trainer-img">
+                                    <img src="<?= $pt['image']; ?>" alt="<?= $pt['nama']; ?>" class="trainer-img">
                                     <div class="trainer-overlay">
-                                        <span class="<?php echo $badge_class; ?>"><?php echo $badge_text; ?></span>
-                                        <h4 class="text-white font-oswald mb-0 text-uppercase">COACH <?php echo explode(' ', trim($pt['nama']))[0]; ?></h4>
+                                        <span class="badge bg-warning text-dark mb-2"><?= $pt['spesialisasi']; ?></span>
+                                        <h4 class="text-white font-oswald mb-0 text-uppercase">COACH <?= explode(' ', trim($pt['nama']))[0]; ?></h4>
                                     </div>
                                 </div>
                                 <div class="trainer-info p-4">
                                     <h6 class="text-warning fw-bold mb-2">PERSONAL SKILL</h6>
                                     <ul class="list-unstyled text-white-50 small mb-0">
                                         <?php foreach ($spec['skills'] as $skill): ?>
-                                            <li>• <?php echo $skill; ?></li>
+                                            <li>• <?= $skill; ?></li>
                                         <?php endforeach; ?>
                                     </ul>
                                 </div>
@@ -361,7 +343,6 @@ $result = $stmt->get_result();
 
             <div class="testimonial-wrapper">
                 <div class="testimonial-track pt-5">
-
                     <?php while ($row = $result->fetch_assoc()) { ?>
                         <div class="testimonial-card">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testimonial-photo">
@@ -378,69 +359,64 @@ $result = $stmt->get_result();
 
 
 
+    <!-- Footer -->
+    <div class="container-fluid px-4 px-md-5" style="background-color: #1a1a1a;">
+        <footer class="py-5" id="contact">
+            <div class="row justify-content-center text-white">
 
-    <div class="container-fluid px-5" style="background-color: #171717ff;">
-        <footer class="py-5">
-            <div class="row text-white">
-                <div class="col-2 text-white">
-                    <h5>Section</h5>
+                <div class="col-12 col-md-5 col-lg-4 mb-5 mb-md-0">
+                    <h3 class="title fw-bold text-uppercase lh-1 mb-3" style="font-size: clamp(2rem, 5vw, 3rem);">
+                        Level Up Your Life.
+                    </h3>
+                    <p class="text-secondary">Akses fasilitas gym premium tanpa batas.</p>
+                    <a href="../auth/login.php" class="btn btn-warning hero-btn text-dark fw-bold px-4">
+                        Join Membership
+                        <ion-icon name="arrow-forward-outline" style="vertical-align: middle; margin-left: 5px;"></ion-icon>
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-3 col-lg-2 mb-4 mb-md-0">
+                    <h6 class="fw-bold text-uppercase mb-3 text-warning">Jelajahi</h6>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="#fasilitas">Fasilitas</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="#kelas">Kelas</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="#trainer">Personal Trainer</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="#testimonial">Testimoni</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="#contact">Hubungi Kami</a></li>
+                        <li class="nav-item mb-2"><a class="nav-link p-0 text-secondary" href="../calculate_bmi/bmi.php">Cek BMI</a></li>
                     </ul>
                 </div>
 
-                <div class="col-2 text-white">
-                    <h5>Section</h5>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <h6 class="fw-bold text-uppercase mb-3 text-warning">Hubungi Kami</h6>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
+                        <li class="nav-item mb-2">
+                            <a href="https://wa.me/+6281112833123" class="nav-link p-0 text-secondary d-flex align-items-center">
+                                <i class="bi bi-telephone-fill me-2"></i> +62 811-1283-3123
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="https://www.instagram.com/power_gym/" class="nav-link p-0 text-secondary d-flex align-items-center">
+                                <i class="bi bi-instagram me-2"></i> power_gym
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-secondary d-flex align-items-start">
+                                <i class="bi bi-geo-alt-fill me-2 mt-1"></i> Jalan Babarsari Nomor 2, Yogyakarta.
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-secondary d-flex align-items-center">
+                                <i class="bi bi-clock-fill me-2"></i> 24 Jam, 7 Hari Seminggu
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="col-2">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">About</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-4 offset-1">
-                    <form>
-                        <h5>Subscribe to our newsletter</h5>
-                        <p>Monthly digest of whats new and exciting from us.</p>
-                        <div class="d-flex w-100 gap-2">
-                            <label for="newsletter1" class="visually-hidden">Email address</label>
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-primary" type="button">Subscribe</button>
-                        </div>
-                    </form>
-                </div>
             </div>
 
-            <div class="d-flex justify-content-between py-4 my-4 border-top">
-                <p>© 2021 Company, Inc. All rights reserved.</p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#twitter"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#instagram"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#facebook"></use>
-                            </svg></a></li>
-                </ul>
+            <div class="d-flex justify-content-center py-4 my-4 border-top border-secondary text-secondary">
+                <p class="m-0">©2025 <b>Power GYM</b>. All rights reserved.</p>
             </div>
         </footer>
     </div>
