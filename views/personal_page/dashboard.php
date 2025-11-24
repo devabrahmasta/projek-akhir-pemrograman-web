@@ -22,8 +22,13 @@ $stmt_user->close();
 
 $avatar = ($user_data['gender'] == 'Perempuan') ? "https://randomuser.me/api/portraits/women/" . rand(1, 90) . ".jpg" : "https://randomuser.me/api/portraits/men/" . rand(1, 90) . ".jpg";
 
+// Tambahkan t.image dan t.spesialisasi di SELECT
 $sql_membership = "SELECT m.tgl_mulai, m.id_trainer, m.id_paket, p.durasi, p.deskripsi, 
-                          t.nama AS nama_trainer, t.gender AS gender_trainer, t.no_hp AS no_hp_trainer
+                          t.nama AS nama_trainer, 
+                          t.gender AS gender_trainer, 
+                          t.no_hp AS no_hp_trainer,
+                          t.image AS foto_trainer,         
+                          t.spesialisasi AS spesialisasi_trainer
                    FROM membership m 
                    JOIN paket_member p ON m.id_paket = p.id_paket 
                    LEFT JOIN trainer t ON m.id_trainer = t.id_trainer 
@@ -41,6 +46,7 @@ $sisa_hari = 0;
 $nama_paket = "Tidak Ada";
 $status_member = "Inactive";
 $status_badge = "Basic";
+$tgl_berakhir_display = "-";
 
 if ($member_data) {
     $tgl_mulai = new DateTime($member_data['tgl_mulai']);
@@ -50,6 +56,8 @@ if ($member_data) {
 
     $tgl_akhir = clone $tgl_mulai;
     $tgl_akhir->modify("+$durasi days");
+
+    $tgl_berakhir_display = $tgl_akhir->format('d M Y');
 
     $tgl_sekarang = new DateTime();
     $tgl_sekarang->setTime(0, 0, 0);
@@ -93,6 +101,7 @@ if ($member_data) {
     }
     ?>
 
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-5 py-3">
         <div class="container-fluid">
             <img style="width: 50px; height: 50px; object-fit: cover;"
@@ -125,9 +134,11 @@ if ($member_data) {
         </div>
     </nav>
 
+
     <div class="container-fluid dashboard-container">
         <div class="row h-100">
 
+            <!-- PROFILE -->
             <div class="col-lg-3 col-md-4 sidebar-area p-0">
                 <div class="d-flex flex-column h-100 p-3">
 
@@ -198,14 +209,15 @@ if ($member_data) {
                 </div>
             </div>
 
+            <!-- OVERVIEW -->
             <div class="col-lg-9 col-md-8 content-area p-4">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3 class="text-white fw-bold display-6">Overview</h3>
                     <small class="text-secondary">Update: Live</small>
                 </div>
-
                 <div class="row g-3 mb-5">
+                    <!-- STREAK -->
                     <div class="col-md-4">
                         <div class="stat-card card-lime">
                             <div class="stat-card-content">
@@ -219,15 +231,23 @@ if ($member_data) {
                             </div>
                         </div>
                     </div>
-
+                    
+                    <!-- MEMBERSHIP -->
                     <div class="col-md-4">
                         <div class="stat-card">
                             <div class="stat-card-content">
                                 <div>
                                     <span class="stat-number" style="font-size: 1.8rem;"><?php echo $sisa_hari; ?> Hari</span>
-                                    <span class="stat-label">(<?php echo htmlspecialchars($nama_paket); ?>)</span>
-                                    <span class="stat-label">Berakhir tgl(<?php echo htmlspecialchars($nama_paket); ?>)</span>
+                                    <span class="stat-label text-warning d-block mb-1"><?php echo htmlspecialchars($nama_paket); ?></span>
+                                    <span class="stat-label text-secondary" style="font-size: 0.8rem;">
+                                        <?php if ($status_member == 'Inactive'): ?>
+                                            Silakan beli paket membership
+                                        <?php else: ?>
+                                            Berakhir: <?php echo $tgl_berakhir_display; ?>
+                                        <?php endif; ?>
+                                    </span>
                                 </div>
+
                                 <div class="stat-icon-circle icon-theme-yellow">
                                     <ion-icon name="time"></ion-icon>
                                 </div>
@@ -235,6 +255,7 @@ if ($member_data) {
                         </div>
                     </div>
 
+                    <!-- TOTAL VISIT -->
                     <div class="col-md-4">
                         <div class="stat-card">
                             <div class="stat-card-content">
@@ -252,7 +273,7 @@ if ($member_data) {
 
                 <?php
                 if ($member_data) {
-                    // 1. KONDISI: Membership Habis
+                    // Membership SUDAH HABIS (Expired)
                     if ($sisa_hari <= 0) {
                 ?>
                         <div class="row g-3 mb-4">
@@ -270,7 +291,7 @@ if ($member_data) {
                         </div>
 
                     <?php
-                        // 2. KONDISI: Member Aktif TAPI Belum Punya Trainer
+                        // Membership AKTIF, tapi BELUM PILIH TRAINER
                     } elseif ($sisa_hari > 0 && empty($member_data['id_trainer'])) {
                     ?>
                         <div class="row g-3 mb-4">
@@ -280,19 +301,20 @@ if ($member_data) {
                                     <div class="text-white">
                                         Membership Anda aktif, tapi belum punya Personal Trainer.
                                         <a href="../membership/pilih_trainer.php?id_paket=<?php echo $member_data['id_paket'] ?? ''; ?>" class="text-info fw-bold text-decoration-none ms-2">
-                                            Cari Trainer Sekarang <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon>
+                                            Cari Trainer Yuk <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     <?php
-                        // 3. KONDISI: Member Aktif & SUDAH PUNYA Trainer (Tampilkan Profil Trainer)
+                        // Membership AKTIF & SUDAH PUNYA TRAINER
                     } else {
-                        // Generate Avatar Trainer Dummy
-                        $avatar_trainer = ($member_data['gender_trainer'] == 'Perempuan')
-                            ? "https://randomuser.me/api/portraits/women/" . rand(1, 99) . ".jpg"
-                            : "https://randomuser.me/api/portraits/men/" . rand(1, 99) . ".jpg";
+                        $foto_trainer = $member_data['foto_trainer'];
+                        if (empty($foto_trainer)) {
+                            $foto_trainer = "https://ui-avatars.com/api/?name=" . urlencode($member_data['nama_trainer']) . "&background=random";
+                        }
                     ?>
                         <div class="row g-3 mb-4">
                             <div class="col-12">
@@ -300,12 +322,14 @@ if ($member_data) {
                                     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
 
                                         <div class="d-flex align-items-center">
-                                            <img src="<?php echo $avatar_trainer; ?>" alt="Trainer"
+                                            <img src="<?php echo $foto_trainer; ?>" alt="Trainer"
                                                 class="rounded-circle border border-2 border-success"
-                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                                style="width: 70px; height: 70px; object-fit: cover;">
 
                                             <div class="ms-3">
-                                                <small class="text-success fw-bold text-uppercase ls-1" style="letter-spacing: 1px;">Personal Trainer Anda</small>
+                                                <small class="text-success fw-bold text-uppercase ls-1" style="letter-spacing: 1px;">
+                                                    <?php echo htmlspecialchars($member_data['spesialisasi_trainer'] ?? 'Personal Trainer'); ?>
+                                                </small>
                                                 <h4 class="text-white fw-bold mb-0"><?php echo htmlspecialchars($member_data['nama_trainer']); ?></h4>
                                             </div>
                                         </div>
@@ -321,9 +345,30 @@ if ($member_data) {
                                 </div>
                             </div>
                         </div>
-                <?php
+                    <?php
                     }
+                } else {
+                    // Belum ada data Membership
+                    ?>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <div class="bg-card-dark p-4 d-flex align-items-center border border-primary shadow-lg" style="border-radius: 12px;">
+                                <div class="text-primary me-3 fs-1">
+                                    <ion-icon name="card-outline"></ion-icon>
+                                </div>
+                                <div class="text-white">
+                                    <h5 class="fw-bold text-white mb-1">Selamat Datang, <?php echo htmlspecialchars($user_data['nama']); ?>! 👋</h5>
+                                    <p class="mb-0 text-secondary">Kamu belum punya membership aktif. Yuk mulai transformasi tubuhmu sekarang!</p>
+                                    <a href="../membership/membership_list.php" class="btn btn-primary fw-bold mt-3">
+                                        Pilih Paket Membership <ion-icon name="arrow-forward-outline" style="vertical-align: middle; margin-left:5px;"></ion-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
                 }
+
                 ?>
 
                 <h4 class="text-white fw-bold mb-3">Kelas Minggu Ini</h4>
@@ -347,6 +392,8 @@ if ($member_data) {
             </div>
         </div>
     </div>
+
+
     <div class="modal fade" id="modalTestimoni" tabindex="-1" aria-labelledby="modalTestimoniLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-dark border-warning">
