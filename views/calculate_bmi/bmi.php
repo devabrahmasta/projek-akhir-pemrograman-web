@@ -71,10 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="nav nav-underline ">
-                    <li class="nav-item"><a class="nav-link text-warning active" href="../personal_page/dashboard.php">Profil Saya</a></li>
+                    <li class="nav-item"><a class="nav-link text-warning" href="../personal_page/dashboard.php">Profil Saya</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="../main_page/index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="../membership/membership_list.php">Membership</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="../calculate_bmi/bmi.php">Cek BMI</a></li>
+                    <li class="nav-item"><a class="nav-link text-white active" href="../calculate_bmi/bmi.php">Cek BMI</a></li>
                     <li class="nav-item">
                         <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                             <a type="button" class="btn btn-danger" href="../../controllers/auth/logout.php">Logout</a>
