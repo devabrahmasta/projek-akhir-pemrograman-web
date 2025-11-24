@@ -4,6 +4,8 @@ use LDAP\Result;
 
 require_once(__DIR__ . "/../../config/connection.php");
 
+session_start();
+
 $sql = "SELECT * FROM  pelanggan";
 $stmt = $connection->prepare($sql);
 $stmt->execute();
