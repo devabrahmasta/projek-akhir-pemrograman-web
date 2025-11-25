@@ -157,29 +157,6 @@ body {
     color: #0dcaf0 !important;
 }
 
-/* Alert Biru Utama (Primary - Member Baru) */
-/* .alert-dark-primary {
-    background-color: transparent !important; 
-    border: 1px solid #0d6efd !important;
-    color: #0d6efd !important;
-    border-radius: 16px;
-}
-
-.alert-dark-primary ion-icon, 
-.alert-dark-primary h5,
-.alert-dark-primary p,
-.alert-dark-primary a {
-    color: #0d6efd !important;
-}
-
-/* Hover effect dikit biar manis */
-/* .alert-dark-warning:hover,
-.alert-dark-info:hover,
-.alert-dark-primary:hover {
-    background-color: transparent !important;
-    transition: 0.3s;
-}  */
-
 .class-card-modern {
     background-color: #2d2929;
     border-radius: 16px;

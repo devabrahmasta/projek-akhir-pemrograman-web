@@ -62,18 +62,12 @@ $result = $stmt->get_result();
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary mt-2 shadow-lg">
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center py-2" href="../personal_page/dashboard.php">
-                                        <ion-icon name="person-outline" class="me-2 text-warning"></ion-icon> Profil
-                                    </a>
+                                <li><a class="dropdown-item d-flex align-items-center py-2" href="../personal_page/dashboard.php">
+                                        <ion-icon name="person-outline" class="me-2 text-warning"></ion-icon> Profil</a>
                                 </li>
-                                <li>
-                                    <hr class="dropdown-divider border-secondary">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-danger d-flex align-items-center py-2 fw-bold" href="../../controllers/auth/logout.php">
-                                        <ion-icon name="log-out-outline" class="me-2"></ion-icon> Logout
-                                    </a>
+                                <li><hr class="dropdown-divider border-secondary"></li>
+                                <li><a class="dropdown-item text-danger d-flex align-items-center py-2 fw-bold" href="../../controllers/auth/logout.php">
+                                        <ion-icon name="log-out-outline" class="me-2"></ion-icon> Logout</a>
                                 </li>
                             </ul>
                         <?php else: ?>
