@@ -15,3 +15,34 @@
     border-color: #ffc107 !important;
     opacity: 0.3;
 }
+
+/* Style untuk Kartu Membership */
+.testimonial-card {
+    background-color: #1e1e1e; /* Warna abu gelap biar beda sama background body */
+    border: 1px solid #444444; /* Border abu-abu tipis saat diam */
+    border-radius: 20px;       /* Sudut membulat */
+    padding: 2rem;
+    height: 100%;              /* Biar tinggi kartu rata semua */
+    transition: all 0.3s ease; /* Transisi halus */
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* Bayangan dikit */
+}
+
+/* Efek saat Mouse Diarahkan (Hover) */
+.testimonial-card:hover {
+    border-color: #ffc107;      /* Border berubah jadi KUNING */
+    background-color: #151515;  /* Background jadi sedikit lebih gelap */
+    transform: translateY(-5px); /* Kartu naik ke atas sedikit */
+    box-shadow: 0 10px 25px rgba(255, 193, 7, 0.15); /* Efek glow kuning tipis */
+}
+
+/* Biar ikon centang lebih rapi */
+.testimonial-card ul li ion-icon {
+    font-size: 1.2rem;
+    vertical-align: sub;
+}
+
+/* Biar tombolnya gak nempel banget sama bawah */
+.testimonial-card .d-grid {
+    margin-top: auto; 
+}

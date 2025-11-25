@@ -2,17 +2,14 @@
 
 * {
   font-family: 'Montserrat', white, sans-serif;
-  /* border: 1px solid red; */
 }
 
+html,
 body {
-    font-family: 'Montseerrat', sans-serif !important;
-}
+  font-family: 'Montserrat', sans-serif !important;
+  overflow-x: hidden;
 
-/* * {
-  font-family: 'Poppins', white, sans-serif;
-  font: white;
-} */
+}
 
 .nav-link:hover {
   color: yellow !important;
@@ -32,61 +29,64 @@ body {
   color: #000;
 }
 
-
-html, body {
-  overflow-x:hidden;
-}
-
-
 .d-flex.justify-content-center.vh-80 {
-    align-items: center; 
-    padding: 20px 0; 
+  align-items: center;
+  padding: 20px 0;
 }
 
 .row.h-50 {
-    height: auto !important; 
-    align-items: stretch; 
+  height: auto !important;
+  align-items: stretch;
 }
 
 
 .bmi-row {
-    width: 85%;
-    align-items: stretch;
-    flex-wrap: wrap;
-    margin: 0 auto; /* Pusatkan row */
+  width: 85%;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Pusatkan row */
 }
 
 .bmi-col {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 }
 
 /* Override style testimonial-card agar cocok untuk layout 1:1 */
 .bmi-card {
-    width: 100% !important; /* Override lebar 280px */
-    height: 100%;
-    flex-grow: 1;
-    margin: 0 !important; /* PENTING: Hapus margin slider */
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
+  width: 100% !important;
+  /* Override lebar 280px */
+  height: 100%;
+  flex-grow: 1;
+  margin: 0 !important;
+  /* PENTING: Hapus margin slider */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Responsif untuk layar kecil */
 @media (max-width: 768px) {
-    .bmi-row {
-        width: 100%;
-    }
-    .d-flex.vh-80 {
-        min-height: auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
+  .bmi-row {
+    width: 100%;
+  }
+
+  .d-flex.vh-80 {
+    min-height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
-    
+
 @keyframes scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-10%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-10%);
+  }
 }

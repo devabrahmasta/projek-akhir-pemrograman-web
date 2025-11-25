@@ -238,6 +238,7 @@
 .master-card .trainer-info {
     background: linear-gradient(45deg, #0f0f0f, #1a1a1a);
 }
+
 /* --- TESTIMONI SECTION --- */
 
 /* Container Pembungkus (Menyembunyikan scrollbar) */
@@ -253,7 +254,7 @@
     display: flex;
     gap: 30px;
     padding: 40px 10px;
-    width: max-content; /* PENTING: Agar lebar mengikuti jumlah kartu + duplikat */
+    width: max-content; 
     
     /* Animasi Jalan */
     animation: scroll 30s linear infinite; 
@@ -270,8 +271,6 @@
         transform: translateX(0);
     }
     100% {
-        /* Kita geser -50% karena total lebar sekarang adalah 200% (asli + duplikat) */
-        /* Saat mencapai -50%, dia akan 'teleport' balik ke 0 secara instan tanpa terlihat mata */
         transform: translateX(-50%);
     }
 }
